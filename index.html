@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Фестиваль профессий | ТСПК</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
+
+body{
+  color:white;
+  overflow-x:hidden;
+  background:#374b7c;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  width:100%;
+  padding:15px 30px;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+}
+
+nav a{
+  margin-left:20px;
+  color:white;
+  text-decoration:none;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:1;
+}
+
+.hero img{
+  width: 350px;
+  animation:float 3s infinite;
+}
+
+@keyframes float{
+  50%{transform:translateY(-12px)}
+}
+
+.hero h1{
+  font-size:48px;
+  opacity:0;
+  animation: fadeInDown 2s ease forwards;
+}
+
+.hero p{
+  opacity:0;
+  animation: fadeInUp 2s ease forwards;
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+.btn{
+  margin-top:20px;
+  padding:12px 25px;
+  background:#f97316;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform: scale(1.1);
+  background:#fb923c;
+}
+
+/* SECTION */
+section{
+  padding:100px 20px;
+  text-align:center;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+  margin-top:40px;
+}
+
+.card{
+  padding:30px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(15px);
+  transition:0.4s;
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.05);
+}
+
+/* FORM */
+input{
+  padding:12px;
+  margin:10px;
+  width:250px;
+  border:none;
+  border-radius:8px;
+}
+
+/* MAP */
+.map{
+  margin-top:30px;
+}
+
+/* FOOTER */
+footer{
+  padding:20px;
+  text-align:center;
+  background:rgba(0,0,0,0.5);
+}
+
+/* ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Анимированные линии на фоне */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(245, 185, 142, 0.2) 0 2px,
+    rgba(15, 23, 42, 0) 2px 50px
+  );
+  z-index: -1;
+  animation: moveLines 40s linear infinite;
+}
+
+/* Точки на фоне для живости */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: -1;
+}
+
+@keyframes moveLines {
+  0% { transform: translate(0,0);}
+  100% { transform: translate(-25%, -25%);}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <b>ТСПК</b>
+    <nav>
+      <a href="#about">О нас</a>
+      <a href="#skills">Компетенции</a>
+      <a href="#contact">Регистрация</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <img src="logo.jpg" alt="Логотип">
+  <h1>Фестиваль профессий</h1>
+  <p>Абилимпикс 2026</p>
+  <div id="timer"></div>
+  <button class="btn" onclick="scrollToForm()">Записаться</button>
+</div>
+
+<section id="about" class="fade">
+  <h2>О фестивале</h2>
+  <p>🎯Фестиваль профессий — это уникальная возможность познакомиться с разнообразными направлениями будущей карьеры, попробовать свои силы в разных компетенциях и узнать о профессиях от настоящих специалистов ТСПК.
+     💡<b
+    🚀 Найти направление, которое вдохновляет именно тебя
+  </p>
+</section>
+
+<section id="skills" class="fade">
+  <h2>Компетенции</h2>
+  <div class="cards">
+    <div class="card" onclick="showInfo('programming')">💻 Программирование</div>
+    <div class="card" onclick="showInfo('design')">🎨 Дизайн</div>
+    <div class="card" onclick="showInfo('preschool')">👶 Дошкольное образование</div>
+    <div class="card" onclick="showInfo('rimary')">📚 Начальные классы</div>
+  </div>
+  <!-- Блок для информации -->
+  <div id="infoBox" style="margin-top:20px; padding:15px; background: rgba(255,255,255,0.1); border-radius:10px; display:none; color:white;"></div>
+</section>
+
+<section id="contact" class="fade">
+  <h2>Регистрация</h2>
+
+  <input id="name" placeholder="Имя">
+  <input id="phone" placeholder="Телефон">
+  <button class="btn" onclick="send()">Отправить</button>
+
+  <div class="map">
+    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor" width="100%" height="300"></iframe>
+  </div>
+</section>
+
+<footer>
+  © 2026 ТСПК
+</footer>
+
+<script>
+
+/* TIMER */
+const date=new Date("March 1, 2026 10:00").getTime();
+setInterval(()=>{
+ let now=new Date().getTime();
+ let diff=date-now;
+ let d=Math.floor(diff/(1000*60*60*24));
+ let h=Math.floor((diff/(1000*60*60))%24);
+ document.getElementById("timer").innerHTML="До начала: "+d+" дн "+h+" ч";
+},1000);
+
+/* SCROLL */
+function scrollToForm(){
+ document.getElementById("contact").scrollIntoView();
+}
+
+/* TELEGRAM SEND */
+function send(){
+ let name=document.getElementById("name").value;
+ let phone=document.getElementById("phone").value;
+
+ if(name==""||phone==""){
+  alert("Заполните все поля");
+  return;
+ }
+
+ let token="8661812083:AAGGWtMpG0ShXDeHTGbmy9seM5xBy-QB2Ho";
+ let chat_id="8736462583";
+
+ let text="Заявка:%0AИмя: "+name+"%0AТелефон: "+phone;
+
+ fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}`)
+  .then(response => {
+    if (!response.ok) throw new Error("Ошибка отправки");
+    alert("Отправлено 🚀");
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+  })
+  .catch(err => alert("Ошибка при отправке: " + err));
+}
+
+/* ANIMATION */
+const faders=document.querySelectorAll('.fade');
+
+window.addEventListener('scroll',()=>{
+ faders.forEach(el=>{
+  if(el.getBoundingClientRect().top<window.innerHeight-100){
+   el.classList.add('show');
+  }
+ });
+});
+
+/* КАРТОЧКИ КОМПЕТЕНЦИЙ */
+function showInfo(topic) {
+  const infoBox = document.getElementById('infoBox');
+  let text = '';
+  switch(topic) {
+    case 'programming':
+      text = '💻 Программирование: изучение языков Python, Java, C++, создание проектов и алгоритмов.';
+      break;
+    case 'design':
+      text = '🎨 Дизайн: графический и веб-дизайн, работа с Photoshop, Figma и креативное мышление.';
+      break;
+    case 'preschool':
+      text = '👶 Дошкольное образование: методики раннего развития, воспитание и обучение малышей.';
+      break;
+    case 'primary':
+      text = '📚 Начальные классы: подготовка детей младшего школьного возраста, обучение чтению, письму и математике.';
+      break;
+  }
+  infoBox.innerHTML = text;
+  infoBox.style.display = 'block';
+}
+
+</script>
+
+</body>
+</html>'p
